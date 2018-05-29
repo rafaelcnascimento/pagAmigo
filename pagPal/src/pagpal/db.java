@@ -2,9 +2,11 @@ package pagpal;
     
     import java.sql.Connection;
     import java.sql.DriverManager;
+    import java.sql.PreparedStatement;
     import java.sql.ResultSet;
     import java.sql.SQLException;
     import java.sql.Statement;
+
 
 public class db {
 
@@ -18,12 +20,22 @@ public class db {
        this.conn = DriverManager.getConnection(DB_URL, USER, PASS);
    }
      
-   public ResultSet selectUser(String nome) throws SQLException{
-    conn = DriverManager.getConnection(DB_URL, USER, PASS);
+   public int getId(String email) throws SQLException{
+        
+       int id = 0;
+       
+       conn = DriverManager.getConnection(DB_URL, USER, PASS);
     
-    ResultSet rs = conn.createStatement().executeQuery("SELECT * from users WHERE nome = '"+nome+"' ");
-    
-    return rs;
+       String sql = "SELECT id FROM users WHERE email = ?";
+        
+       PreparedStatement stmt = conn.prepareStatement(sql);  
+       stmt.setString(1, email);  
+        
+       ResultSet rs = stmt.executeQuery();
+       while (rs.next()) {
+          id = rs.getInt("id");
+       }
+       return id;
    }
 }
 

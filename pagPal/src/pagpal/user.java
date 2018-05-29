@@ -56,19 +56,16 @@ public class user {
         Connection conn = DB.conn;
         
             String sql = "INSERT INTO users(nome,email,cc,senha) VALUES(?,?,?,?)";  
-            try {  
-                PreparedStatement stmt = conn.prepareStatement(sql);  
-                stmt.setString(1, nome);  
-                stmt.setString(2, email);  
-                stmt.setString(3, cc);  
-                stmt.setString(4, senha);  
-                stmt.execute();  
-                stmt.close();  
-                
-                System.out.println("\nCadastro efetuado com sucesso!");
-            } catch (SQLException u) {  
-                throw new RuntimeException(u);  
-        }  
+          
+            PreparedStatement stmt = conn.prepareStatement(sql);  
+            stmt.setString(1, nome);  
+            stmt.setString(2, email);  
+            stmt.setString(3, cc);  
+            stmt.setString(4, senha);  
+            stmt.execute();  
+            stmt.close();  
+            
+            System.out.println("\nCadastro efetuado com sucesso!");
     }
     
     public static String login() throws SQLException {
@@ -91,7 +88,7 @@ public class user {
         ResultSet rs = stmt.executeQuery();
 
         if (!rs.next()) {
-            System.out.println("ERROW");
+            System.err.println("Dados incorretos");
             email = null;
             return email;
         } else {
