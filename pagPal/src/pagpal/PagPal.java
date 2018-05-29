@@ -9,6 +9,7 @@ public class PagPal {
 
        int escolha;
        boolean loop = true;
+       String email;
        
        Scanner scan = new Scanner(System.in);
        
@@ -25,7 +26,11 @@ public class PagPal {
                     user.cadastro();
                     break;
                 case 2:
-                    System.out.println("Login");
+                    email = user.login();
+                    if (email != null) {
+                        user usuario = new user(email);
+                        System.out.println(usuario.nome);
+                    }
                     break;
                 case 3:
                     loop = false;
