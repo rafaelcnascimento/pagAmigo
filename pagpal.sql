@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 29-Maio-2018 às 17:04
+-- Generation Time: 30-Maio-2018 às 17:07
 -- Versão do servidor: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -38,6 +38,13 @@ CREATE TABLE `ordens` (
   `aceito` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `ordens`
+--
+
+INSERT INTO `ordens` (`id`, `requisitante_id`, `requisitado_id`, `valor`, `data`, `mensagem`, `aceito`) VALUES
+(1, 2, 3, 100, '2018-05-30 17:31:44', 'Poker', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -58,7 +65,9 @@ CREATE TABLE `pagamentos` (
 
 INSERT INTO `pagamentos` (`id`, `sender_id`, `receiver_id`, `valor`, `data`) VALUES
 (2, 4, 4, 50, '2018-05-29 19:59:37'),
-(3, 4, 1, 75, '2018-05-29 20:02:06');
+(3, 4, 1, 75, '2018-05-29 20:02:06'),
+(4, 2, 3, 100, '2018-05-30 17:23:14'),
+(5, 3, 3, 50, '2018-05-30 17:24:58');
 
 -- --------------------------------------------------------
 
@@ -80,9 +89,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nome`, `email`, `cc`, `balanco`, `senha`) VALUES
-(1, 'Uno Mile', 'a@a.com', '123412341234134', 154, '123'),
-(2, 'Elon Musk', 'elon@tesla.com', '6666666666666666', 5000, 'spaceX'),
-(3, 'Alfred', 'aaa', '1678167816781678', 200, '123'),
+(1, 'Joao Junior', 'jojo', '1234123412341234', 154, '123'),
+(2, 'Elon Musk', 'elon@tesla.com', '6666666666666666', 4900, 'spaceX'),
+(3, 'Alfred', 'aaa', '1678167816781678', 350, '123'),
 (4, 'Jean', 'a', '1234123412345678', 237, '1');
 
 --
@@ -120,13 +129,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `ordens`
 --
 ALTER TABLE `ordens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pagamentos`
 --
 ALTER TABLE `pagamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`

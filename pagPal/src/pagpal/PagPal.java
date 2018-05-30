@@ -6,42 +6,44 @@ import java.util.Scanner;
 public class PagPal {
     
     public static void menuInicial() throws SQLException {
-    int escolha;
-    boolean loop = true;
-    String email;
-       
-    Scanner scan = new Scanner(System.in);
+    
+        int escolha;
+        boolean loop = true;
+        String email;
 
-    while (loop) {            
-            System.out.println("\nEscolha uma opção:");
-            System.out.println("1-Cadastrar");
-            System.out.println("2-Logar");
-            System.out.println("3-Sair");
-            
-            escolha = scan.nextInt();
-            
-            switch (escolha) {
-                case 1:
-                    user.cadastro();
-                    break;
-                case 2:
-                    email = user.login();
-                    if (email != null) {
-                        user usuario = new user(email);
-                        menuLogado(usuario);
-                    }
-                    break;
-                case 3:
-                    loop = false;
-                    break;
-                default:
-                    System.err.println("Opção invalida");
-                    break;
-            }
+        db DB = new db();   
+        Scanner scan = new Scanner(System.in);
+
+        while (loop) {            
+                System.out.println("\nEscolha uma opção:");
+                System.out.println("1-Cadastrar");
+                System.out.println("2-Logar");
+                System.out.println("3-Sair");
+
+                escolha = scan.nextInt();
+
+                switch (escolha) {
+                    case 1:
+                        user.cadastro(DB);
+                        break;
+                    case 2:
+                        email = user.login(DB);
+                        if (email != null) {
+                            user usuario = new user(email);
+                            menuLogado(usuario, DB);
+                        }
+                        break;
+                    case 3:
+                        loop = false;
+                        break;
+                    default:
+                        System.err.println("Opção invalida");
+                        break;
+                }
         }
 }
     
-public static void menuLogado(user usuario) throws SQLException {
+public static void menuLogado(user usuario, db DB) throws SQLException {
     
     int escolha;
     boolean loop = true;
@@ -62,14 +64,20 @@ public static void menuLogado(user usuario) throws SQLException {
             
             switch (escolha) {
                 case 1:
-                    dinheiro.enviar(usuario);
+                    dinheiro.enviar(usuario,DB);
                     break;
                 case 2:
-                    dinheiro.depositar(usuario);
+                    dinheiro.depositar(usuario,DB);
                     break;
                 case 3:
-                    dinheiro.solicitar(usuario);
+                    dinheiro.solicitar(usuario,DB);
                     break;
+                case 4:
+                    dinheiro.historico(usuario,DB);
+                    break;
+                case 6:
+                    user.editar(usuario,DB);
+                    break;    
                 case 7:
                     loop = false;
                     break;
